@@ -39,5 +39,17 @@ describe('Gilded Rose', function () {
         updatedItem.quality,
       ]).toEqual(['foo', sellIn - 1, quality - 2]);
     });
+
+    test('for items with quality = 1 and sellIn < 0, sellIn in reduced by 1 and quality is reduced to 0', () => {
+      const sellIn = -1 - Math.floor(Math.random() * 50);
+      const gildedRose = new Shop([new Item('foo', sellIn, 1)]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual(['foo', sellIn - 1, 0]);
+    });
   });
 });

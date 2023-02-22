@@ -52,4 +52,31 @@ describe('Gilded Rose', function () {
       ]).toEqual(['foo', sellIn - 1, 0]);
     });
   });
+
+  describe('updateQuality testing for items with name "AgedBrie"', () => {
+    test('where 0 <= quality < 50, quality is increased by one and sellIn is reduced by 1', () => {
+      const sellIn = Math.floor((Math.random() - 0.5) * 100);
+      const quality = Math.floor(Math.random() * 50);
+      const gildedRose = new Shop([new Item('Aged Brie', sellIn, quality)]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual(['Aged Brie', sellIn - 1, quality + 1]);
+    });
+
+    test('where quality = 50, quality remains constant and sellIn is reduced by 1', () => {
+      const sellIn = Math.floor((Math.random() - 0.5) * 100);
+      const gildedRose = new Shop([new Item('Aged Brie', sellIn, 50)]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual(['Aged Brie', sellIn - 1, 50]);
+    });
+  });
 });

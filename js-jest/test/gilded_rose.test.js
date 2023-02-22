@@ -79,4 +79,20 @@ describe('Gilded Rose', function () {
       ]).toEqual(['Aged Brie', sellIn - 1, 50]);
     });
   });
+
+  describe('updateQuality testing for items named "Sulfuras, Hand of Ragnaros"', () => {
+    test('sellIn value and quality remain constant, quality is always equal to 80', () => {
+      const sellIn = Math.floor((Math.random() - 0.5) * 100);
+      const gildedRose = new Shop([
+        new Item('Sulfuras, Hand of Ragnaros', sellIn, 80),
+      ]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual(['Sulfuras, Hand of Ragnaros', sellIn, 80]);
+    });
+  });
 });

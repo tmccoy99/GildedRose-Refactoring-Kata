@@ -120,32 +120,32 @@ describe('Gilded Rose', function () {
     });
   });
 
-  // describe('updateQuality testing for items named "Backstage passes to a TAFKAL80ETC concert"', () => {
-  //   test('if sellIn decreases below zero, the quality of the item is set to 0 and sellIn reduces by 1', () => {
-  //     const positiveQuality = Math.floor(1 + Math.random() * 50);
-  //     const passForToday = new Item(
-  //       'Backstage passes to a TAFKAL80ETC concert',
-  //       0,
-  //       positiveQuality
-  //     );
-  //     const negativeSellIn = -1 - Math.floor(Math.random() * 50);
-  //     const oldPass = new Item(
-  //       'Backstage passes to a TAFKAL80ETC concert',
-  //       negativeSellIn,
-  //       0
-  //     );
-  //     const gildedRose = new Shop([passForToday, oldPass]);
-  //     gildedRose.updateQuality();
-  //     expect([
-  //       passForToday.name,
-  //       passForToday.sellIn,
-  //       passForToday.quality,
-  //     ]).toEqual(['Backstage passes to a TAFKAL80ETC concert', -1, 0]);
-  //     expect([oldPass.name, oldPass.sellIn, oldPass.quality]).toEqual([
-  //       'Backstage passes to a TAFKAL80ETC concert',
-  //       negativeSellIn - 1,
-  //       0,
-  //     ]);
-  //   });
-  // });
+  describe('updateQuality testing for items named "Backstage passes to a TAFKAL80ETC concert"', () => {
+    test('if sellIn decreases below zero, the quality of the item is set to 0 and sellIn reduces by 1', () => {
+      const positiveQuality = Math.floor(1 + Math.random() * 50);
+      const passForToday = new Item(
+        'Backstage passes to a TAFKAL80ETC concert',
+        0,
+        positiveQuality
+      );
+      const negativeSellIn = -1 - Math.floor(Math.random() * 50);
+      const oldPass = new Item(
+        'Backstage passes to a TAFKAL80ETC concert',
+        negativeSellIn,
+        0
+      );
+      const gildedRose = new Shop([passForToday, oldPass]);
+      gildedRose.updateQuality();
+      expect([
+        passForToday.name,
+        passForToday.sellIn,
+        passForToday.quality,
+      ]).toEqual(['Backstage passes to a TAFKAL80ETC concert', -1, 0]);
+      expect([oldPass.name, oldPass.sellIn, oldPass.quality]).toEqual([
+        'Backstage passes to a TAFKAL80ETC concert',
+        negativeSellIn - 1,
+        0,
+      ]);
+    });
+  });
 });

@@ -14,8 +14,8 @@ describe('Gilded Rose', function () {
       ]).toEqual(['foo', sellIn - 1, 0]);
     });
 
-    test('for items with 0 < quality <= 50 and sellIn >= 0, both sellIn and quality are reduced by 1', () => {
-      const sellIn = Math.floor(Math.random() * 100);
+    test('for items with 0 < quality <= 50 and sellIn > 0, both sellIn and quality are reduced by 1', () => {
+      const sellIn = Math.floor(1 + Math.random() * 100);
       const quality = Math.floor(1 + Math.random() * 50);
       const gildedRose = new Shop([new Item('foo', sellIn, quality)]);
       gildedRose.updateQuality();
@@ -27,8 +27,8 @@ describe('Gilded Rose', function () {
       ]).toEqual(['foo', sellIn - 1, quality - 1]);
     });
 
-    test('for items with 1 < quality <= 50 and sellIn < 0, sellIn in reduced by 1 and quality is reduced by 2', () => {
-      const sellIn = -1 - Math.floor(Math.random() * 50);
+    test('for items with 1 < quality <= 50 and sellIn <= 0, sellIn in reduced by 1 and quality is reduced by 2', () => {
+      const sellIn = -Math.floor(Math.random() * 50);
       const quality = Math.floor(2 + Math.random() * 49);
       const gildedRose = new Shop([new Item('foo', sellIn, quality)]);
       gildedRose.updateQuality();
@@ -40,8 +40,8 @@ describe('Gilded Rose', function () {
       ]).toEqual(['foo', sellIn - 1, quality - 2]);
     });
 
-    test('for items with quality = 1 and sellIn < 0, sellIn in reduced by 1 and quality is reduced to 0', () => {
-      const sellIn = -1 - Math.floor(Math.random() * 50);
+    test('for items with quality = 1 and sellIn <= 0, sellIn in reduced by 1 and quality is reduced to 0', () => {
+      const sellIn = -Math.floor(Math.random() * 50);
       const gildedRose = new Shop([new Item('foo', sellIn, 1)]);
       gildedRose.updateQuality();
       const updatedItem = gildedRose.items[0];
@@ -95,4 +95,33 @@ describe('Gilded Rose', function () {
       ]).toEqual(['Sulfuras, Hand of Ragnaros', sellIn, 80]);
     });
   });
+
+  // describe('updateQuality testing for items named "Backstage passes to a TAFKAL80ETC concert"', () => {
+  //   test('if sellIn decreases below zero, the quality of the item is set to 0 and sellIn reduces by 1', () => {
+  //     const positiveQuality = Math.floor(1 + Math.random() * 50);
+  //     const passForToday = new Item(
+  //       'Backstage passes to a TAFKAL80ETC concert',
+  //       0,
+  //       positiveQuality
+  //     );
+  //     const negativeSellIn = -1 - Math.floor(Math.random() * 50);
+  //     const oldPass = new Item(
+  //       'Backstage passes to a TAFKAL80ETC concert',
+  //       negativeSellIn,
+  //       0
+  //     );
+  //     const gildedRose = new Shop([passForToday, oldPass]);
+  //     gildedRose.updateQuality();
+  //     expect([
+  //       passForToday.name,
+  //       passForToday.sellIn,
+  //       passForToday.quality,
+  //     ]).toEqual(['Backstage passes to a TAFKAL80ETC concert', -1, 0]);
+  //     expect([oldPass.name, oldPass.sellIn, oldPass.quality]).toEqual([
+  //       'Backstage passes to a TAFKAL80ETC concert',
+  //       negativeSellIn - 1,
+  //       0,
+  //     ]);
+  //   });
+  // });
 });

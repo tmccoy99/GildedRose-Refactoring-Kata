@@ -281,5 +281,32 @@ describe('Gilded Rose', function () {
         updatedItem.quality,
       ]).toEqual(['Conjured foo', sellIn - 1, quality - 4]);
     });
+
+    test('quality cannot reduce below zero', () => {
+      positiveSellIn = 1 + Math.floor(Math.random() * 50);
+      negativeSellIn = -Math.floor(Math.random() * 100);
+      const inDateConjuration = new Item(
+        'Conjured bar',
+        positiveSellIn,
+        Math.floor(Math.random() * 2)
+      );
+      const outOfDateConjuration = new Item(
+        'Conjured bar',
+        negativeSellIn,
+        Math.floor(Math.random() * 4)
+      );
+      const gildedRose = new Shop([inDateConjuration, outOfDateConjuration]);
+      gildedRose.updateQuality();
+      expect([
+        inDateConjuration.name,
+        inDateConjuration.sellIn,
+        inDateConjuration.quality,
+      ]).toEqual(['Conjured bar', positiveSellIn - 1, 0]);
+      expect([
+        outOfDateConjuration.name,
+        outOfDateConjuration.sellIn,
+        outOfDateConjuration.quality,
+      ]).toEqual(['Conjured bar', negativeSellIn - 1, 0]);
+    });
   });
 });

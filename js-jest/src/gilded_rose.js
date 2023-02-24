@@ -10,6 +10,7 @@ class Shop {
   constructor(items = []) {
     this.items = items;
   }
+
   updateQuality() {
     this.items.forEach((item) => {
       let increment;
@@ -18,8 +19,6 @@ class Shop {
           return;
         case 'Aged Brie':
           increment = item.sellIn <= 0 ? 2 : 1;
-          item.quality = Math.min(50, item.quality + increment);
-          item.sellIn += -1;
           break;
         case 'Backstage passes to a TAFKAL80ETC concert':
           increment =
@@ -30,17 +29,22 @@ class Shop {
               : item.sellIn >= 1
               ? 3
               : -item.quality;
-          item.quality = Math.min(50, item.quality + increment);
-          item.sellIn += -1;
           break;
         default:
           increment = item.sellIn <= 0 ? -2 : -1;
-          item.quality = Math.max(0, item.quality + increment);
-          item.sellIn += -1;
       }
+      this.#incrementQuality(item, increment);
+      item.sellIn += -1;
     });
 
     return this.items;
+  }
+
+  #incrementQuality(item, increment) {
+    item.quality =
+      increment > 0
+        ? Math.min(50, item.quality + increment)
+        : Math.max(0, item.quality + increment);
   }
 }
 

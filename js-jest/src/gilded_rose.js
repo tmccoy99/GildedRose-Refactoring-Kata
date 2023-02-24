@@ -15,6 +15,12 @@ class Shop {
       if (item.name === 'Sulfuras, Hand of Ragnaros') {
         return;
       }
+      if (item.name === 'Aged Brie') {
+        const increment = item.sellIn <= 0 ? 2 : 1;
+        item.quality = Math.min(50, item.quality + increment);
+        item.sellIn += -1;
+        return;
+      }
       if (
         item.name != 'Aged Brie' &&
         item.name != 'Backstage passes to a TAFKAL80ETC concert'

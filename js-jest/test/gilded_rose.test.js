@@ -29,7 +29,7 @@ describe('Gilded Rose', function () {
 
     test('for items with 1 < quality <= 50 and sellIn <= 0, sellIn in reduced by 1 and quality is reduced by 2', () => {
       const sellIn = -Math.floor(Math.random() * 50);
-      const quality = Math.floor(2 + Math.random() * 49);
+      const quality = 2 + Math.floor(Math.random() * 49);
       const gildedRose = new Shop([new Item('foo', sellIn, quality)]);
       gildedRose.updateQuality();
       const updatedItem = gildedRose.items[0];
@@ -122,7 +122,7 @@ describe('Gilded Rose', function () {
 
   describe('updateQuality testing for items named "Backstage passes to a TAFKAL80ETC concert"', () => {
     test('if sellIn decreases below zero, the quality of the item is set to 0 and sellIn reduces by 1', () => {
-      const positiveQuality = Math.floor(1 + Math.random() * 50);
+      const positiveQuality = 1 + Math.floor(Math.random() * 50);
       const passForToday = new Item(
         'Backstage passes to a TAFKAL80ETC concert',
         0,
@@ -257,8 +257,8 @@ describe('Gilded Rose', function () {
 
   describe('Conjured item testing', () => {
     test('for items with sellIn >= 1 and quality >= 2, quality reduces by 2 and sellIn reduces by 1', () => {
-      const sellIn = Math.floor(1 + Math.random() * 100);
-      const quality = Math.floor(2 + Math.random() * 50);
+      const sellIn = 1 + Math.floor(Math.random() * 100);
+      const quality = 2 + Math.floor(Math.random() * 49);
       const gildedRose = new Shop([new Item('Conjured foo', sellIn, quality)]);
       gildedRose.updateQuality();
       const updatedItem = gildedRose.items[0];

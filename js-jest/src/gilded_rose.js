@@ -32,6 +32,9 @@ class Shop {
           break;
         default:
           increment = item.sellIn <= 0 ? -2 : -1;
+          if (item.name.startsWith('Conjured')) {
+            increment = -2;
+          }
       }
       this.#incrementQuality(item, increment);
       item.sellIn += -1;

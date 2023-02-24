@@ -254,4 +254,19 @@ describe('Gilded Rose', function () {
       ]);
     });
   });
+
+  describe('Conjured item testing', () => {
+    test('for items with sellIn >= 1 and quality >= 2, quality reduces by 2 and sellIn reduces by 1', () => {
+      const sellIn = Math.floor(1 + Math.random() * 100);
+      const quality = Math.floor(2 + Math.random() * 50);
+      const gildedRose = new Shop([new Item('Conjured foo', sellIn, quality)]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual(['Conjured foo', sellIn - 1, quality - 2]);
+    });
+  });
 });

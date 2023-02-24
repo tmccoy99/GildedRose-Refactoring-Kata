@@ -215,5 +215,43 @@ describe('Gilded Rose', function () {
         updatedItem.quality,
       ]).toEqual(['Backstage passes to a TAFKAL80ETC concert', sellIn - 1, 50]);
     });
+
+    test('for 11 <= sellIn and quality <= 49, quality is increases by 1 and sellIn reduces by 1', () => {
+      const sellIn = 11 + Math.floor(Math.random() * 40);
+      const quality = Math.floor(Math.random() * 50);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', sellIn, quality),
+      ]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual([
+        'Backstage passes to a TAFKAL80ETC concert',
+        sellIn - 1,
+        quality + 1,
+      ]);
+    });
+
+    test('for 11 <= sellIn and quality = 50, quality remains constant and sellIn reduces by 1', () => {
+      const sellIn = 11 + Math.floor(Math.random() * 40);
+      const quality = Math.floor(Math.random() * 50);
+      const gildedRose = new Shop([
+        new Item('Backstage passes to a TAFKAL80ETC concert', sellIn, quality),
+      ]);
+      gildedRose.updateQuality();
+      const updatedItem = gildedRose.items[0];
+      expect([
+        updatedItem.name,
+        updatedItem.sellIn,
+        updatedItem.quality,
+      ]).toEqual([
+        'Backstage passes to a TAFKAL80ETC concert',
+        sellIn - 1,
+        quality + 1,
+      ]);
+    });
   });
 });
